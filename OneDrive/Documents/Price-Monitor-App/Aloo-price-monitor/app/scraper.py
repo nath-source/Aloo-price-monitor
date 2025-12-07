@@ -5,45 +5,47 @@ import random
 import time
 
 def get_product_details(url):
-    # List of User-Agents to rotate (makes us look like different browsers)
     user_agents = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15"
     ]
 
     headers = {
         "User-Agent": random.choice(user_agents),
         "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
+        # REMOVED "Accept-Encoding" - Let requests handle this automatically
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Connection": "keep-alive",
         "Upgrade-Insecure-Requests": "1"
     }
     
     try:
-        # Add a random delay so we don't hammer the server
+        # Random delay to look human
         time.sleep(random.uniform(1, 3))
         
         page = requests.get(url, headers=headers, timeout=15)
         
-        # Check if they blocked us
+        # Debug Log for Render
+        print(f"--- Scraper Status Code: {page.status_code} ---")
+        
         if page.status_code != 200:
-            print(f"Blocked! Status Code: {page.status_code}")
             return None, None
 
         soup = BeautifulSoup(page.content, 'html.parser')
         
-        # ... (Keep the rest of your extraction logic exactly the same below) ...
+        # 1. Extract Title
         title = "Unknown Product"
         if soup.find("meta", property="og:title"):
             title = soup.find("meta", property="og:title")["content"]
+        elif soup.find("h1"):
+            title = soup.find("h1").get_text().strip()
         elif soup.find("title"):
             title = soup.find("title").get_text().strip()
 
+        # 2. Extract Price
         price = 0.0
         
-        # Method A: Meta price
+        # Method A: Meta Tags
         meta_price = soup.find("meta", property="product:price:amount") or \
                      soup.find("meta", property="og:price:amount")
         
@@ -53,15 +55,21 @@ def get_product_details(url):
             except ValueError:
                 pass
         
-        # Method B: Regex fallback
+        # Method B: Visual Scrape (Look for currency symbols)
         if price == 0.0:
-            price_text = soup.find(string=re.compile(r"[\$\₵€£]\s?\d+"))
-            if price_text:
-                clean_price = re.sub(r"[^\d.]", "", price_text)
+            # Look for elements containing $ or £
+            price_candidates = soup.find_all(string=re.compile(r"[\$\£\€]\s?\d+"))
+            for candidate in price_candidates:
+                text = candidate.strip()
+                # Clean up the string (remove non-numeric chars except dot)
+                clean_price = re.sub(r"[^\d.]", "", text)
                 try:
-                    price = float(clean_price)
+                    found_price = float(clean_price)
+                    if found_price > 0:
+                        price = found_price
+                        break # Stop at the first valid price
                 except ValueError:
-                    pass
+                    continue
 
         return title, price
 
