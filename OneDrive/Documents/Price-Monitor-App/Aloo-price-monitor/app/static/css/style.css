@@ -1,0 +1,220 @@
+/* app/static/css/style.css */
+
+:root {
+    /* Modern Emerald Green Palette */
+    --primary-color: #10b981;       /* Vibrant Emerald */
+    --primary-hover: #059669;       /* Darker Emerald for hover */
+    --dark-bg: #0f172a;             /* Deep Slate Blue/Black */
+    --light-bg: #f0fdf4;            /* Very light mint tint */
+    
+    /* Fresh Green Gradient */
+    --hero-gradient: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+/* Global Font & Reset */
+body {
+    font-family: 'Rubik', sans-serif;
+    background-color: #ffffff;
+    color: #334155; /* Soft dark grey text, not pitch black */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Clean White Navbar --- */
+.navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbar-brand {
+    font-weight: 800; /* Extra bold */
+    letter-spacing: -0.5px;
+    font-size: 1.5rem;
+    color: #1e293b !important; /* Dark text */
+}
+
+/* Make the word "Monitor" Green */
+.brand-accent {
+    color: var(--primary-color);
+}
+
+.nav-link {
+    color: #64748b !important; /* Slate grey links */
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: var(--hero-gradient);
+    border: 1px solid #a7f3d0; /* Subtle green border */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Feature Cards --- */
+.feature-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px; /* Softer corners */
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    border-color: var(--primary-color);
+}
+
+/* Green Card Variant */
+.card-green {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+.card-green h3, .card-green p {
+    color: white !important;
+}
+
+/* Dark Card Variant */
+.card-dark {
+    background-color: var(--dark-bg);
+    color: white;
+    border: none;
+}
+
+/* --- Buttons (Overriding Bootstrap Blue) --- */
+.btn {
+    border-radius: 50px; /* Pill shaped buttons - very modern */
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Turn btn-primary into Green */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4); /* Green shadow */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.5);
+}
+
+.btn-outline-secondary {
+    border: 2px solid #e2e8f0;
+    color: #64748b;
+}
+
+.btn-outline-secondary:hover {
+    background-color: white;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* --- Auth Forms (Login/Register) --- */
+.auth-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    background-color: #f8fafc; /* Very light slate bg */
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 3rem;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+}
+
+.auth-container h2 {
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--dark-bg);
+    text-align: center;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); /* Green glow */
+    background-color: white;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: white !important;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* --- New 'How it Works' Section --- */
+.step-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    border: 1px solid #f1f5f9;
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.15); /* Soft green shadow */
+    border-color: #d1fae5;
+}
+
+/* The Green Number Circle */
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: #ecfdf5; /* Very light green */
+    color: #10b981;      /* Emerald text */
+    font-weight: 800;
+    font-size: 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    border: 1px solid #d1fae5;
+}
+
+/* Icon styling (using SVGs) */
+.step-icon {
+    margin-bottom: 1.5rem;
+    color: #10b981;
+}

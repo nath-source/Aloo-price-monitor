@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h2>Welcome Back</h2>
+        <p class="auth-subtitle">Login to manage your watchlist</p>
+        
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label small fw-bold text-secondary">EMAIL ADDRESS</label>
+                <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label small fw-bold text-secondary">PASSWORD</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="text-center">
+                <p class="small text-muted">Don't have an account? <a href="{{ url_for('auth.register') }}" class="text-success fw-bold text-decoration-none">Register here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

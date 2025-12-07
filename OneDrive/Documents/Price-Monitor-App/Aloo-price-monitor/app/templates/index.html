@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-4 p-md-5 mb-4 rounded-3 shadow-sm hero-section text-center">
+    <div class="container-fluid py-3 py-md-5 hero-content">
+        <h1 class="display-5 fw-bold text-dark mb-3">Never Overpay Again.</h1>
+        <p class="col-md-8 fs-4 mx-auto text-secondary mb-4">
+            Stop refreshing pages manually. Paste a product URL, set your target price, and let our bots watch the price for you 24/7.
+        </p>
+        
+        {% if current_user.is_authenticated %}
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg px-4 gap-3">Go to Dashboard</a>
+            </div>
+        {% else %}
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg px-4">Start Tracking Free</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    
+    <div class="col">
+        <div class="step-card text-start">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="step-number">1</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-link-45deg step-icon" viewBox="0 0 16 16">
+                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                </svg>
+            </div>
+            <h3 class="fw-bold text-dark h4 mb-3">Copy & Paste URL</h3>
+            <p class="text-secondary mb-0">
+                Find a product you love on Amazon or Jumia. Just copy the link and paste it into your dashboard.
+            </p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="step-card text-start">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="step-number">2</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-robot step-icon" viewBox="0 0 16 16">
+                    <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z"/>
+                    <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"/>
+                </svg>
+            </div>
+            <h3 class="fw-bold text-dark h4 mb-3">We Watch 24/7</h3>
+            <p class="text-secondary mb-0">
+                Our bots scan the page every hour. You don't need to keep the tab open or check back manually.
+            </p>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="step-card text-start">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="step-number">3</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell-fill step-icon" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                </svg>
+            </div>
+            <h3 class="fw-bold text-dark h4 mb-3">Instant Alert</h3>
+            <p class="text-secondary mb-0">
+                The second the price drops below your target, we email you immediately. You snag the deal.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
