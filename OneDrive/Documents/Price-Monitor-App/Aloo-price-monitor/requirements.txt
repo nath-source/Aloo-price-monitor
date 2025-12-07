@@ -1,7 +1,10 @@
 Flask
-python-dotenv
 Flask-SQLAlchemy
-flask-login
+Flask-Login
+python-dotenv
 requests
 beautifulsoup4
+celery
+redis
 gunicorn
+psycopg2-binary
